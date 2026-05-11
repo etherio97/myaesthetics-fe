@@ -196,6 +196,10 @@ export class CreateReceiptComponent implements OnInit {
             data.date = moment().toISOString();
         }
 
+        if (!data.member) {
+            delete data.member;
+        }
+
         delete data.item;
         delete data.discountPercent;
 
