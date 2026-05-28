@@ -52,7 +52,7 @@ export class CreateReceiptComponent implements OnInit {
             customerContact: [''],
             date: [''],
             member: [''],
-            paymentMethod: ['', Validators.required],
+            paymentMethod: ['Cash', Validators.required],
             discountAmount: [''],
             discountPercent: [''],
             item: [''],
@@ -214,7 +214,7 @@ export class CreateReceiptComponent implements OnInit {
         let i = 0;
 
         this.selectedItems.forEach((item) => {
-            i += item.sellingPrice * item.quantity - (item.discount || 0);
+            i += item.sellingPrice * item.quantity;
         });
 
         return i;
