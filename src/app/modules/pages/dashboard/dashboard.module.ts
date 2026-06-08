@@ -8,6 +8,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { ManagerDashboardComponent } from './components/manager-dashboard/manager-dashboard.component';
 import { DisplayItemComponent } from './components/display-item/display-item.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
     declarations: [
@@ -21,6 +30,12 @@ import { DisplayItemComponent } from './components/display-item/display-item.com
         SharedModule,
         MatIconModule,
         MatButtonModule,
+        NgApexchartsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatMomentDateModule,
+        MatTabsModule,
     ],
 })
 export class DashboardModule {}

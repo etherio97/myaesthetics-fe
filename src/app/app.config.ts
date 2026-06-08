@@ -10,6 +10,7 @@ export const SERVICE_URLS = {
     MEMBER_API: `${BASE_URL}/member`,
     AUTH_API: `${BASE_URL}/auth`,
     DASHBOARD_API: `${BASE_URL}/dashboard`,
+    EXPENSE_API: `${BASE_URL}/expense`,
 };
 
 export const APP_CONFIG = {
@@ -19,6 +20,14 @@ export const APP_CONFIG = {
     ITEM_TYPES: ['Saloon', 'Facial'],
     PAYMENT_METHODS: ['Cash', 'MMQR', 'Credit', 'Other'],
     MEMBER_TYPES: ['Regular', 'VIP', 'VVIP'],
+    EXPENSE_CATEGORY: [
+        'Miscellaneous',
+        'Stationery',
+        'Transportation',
+        'Utilities',
+        'Maintenance',
+        'Other',
+    ],
 };
 
 export const NAVIGATION_ITEMS: FuseNavigationItem[] = [
@@ -63,6 +72,16 @@ export const NAVIGATION_ITEMS: FuseNavigationItem[] = [
                 link: '/deleted-receipts',
                 meta: {
                     roles: ['admin', 'manager'],
+                },
+            },
+            {
+                id: 'expense',
+                title: 'Expense',
+                type: 'basic',
+                icon: 'mat_solid:history_edu',
+                link: '/expense',
+                meta: {
+                    roles: ['admin', 'manager', 'cashier'],
                 },
             },
             {

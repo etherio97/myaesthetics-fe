@@ -7,6 +7,7 @@ import { UserService } from 'app/core/user/user.service';
 import { ConfirmService } from 'app/services/confirm.service';
 import { ReceiptService } from 'app/services/receipt.service';
 import moment from 'moment';
+import { utils, writeFile } from 'xlsx';
 
 @Component({
     selector: 'app-list-receipt',
@@ -131,5 +132,36 @@ export class ListReceiptComponent implements OnInit, AfterViewInit {
                 .afterOpened()
                 .subscribe(() => this.reloadData());
         });
+    }
+
+    exportExcel() {
+        const fileName = `myaesthetics-receipts-${moment().format('YYYYMMDDHHmmss')}.xlsx`;
+        const worksheet = utils.json_to_sheet(
+            this.searchResult.map((data) => {
+                return {
+                    'Receipt ID': data.receiptNo,
+                    Date: moment(data.date).format('YYYY-MM-DD hh:mm:ss A'),
+                    'Customer Name': data.customerName || '',
+                    'Customer Contact': data.customerContact || '',
+                    'Cashier Name': data.user ? data.user.fullName : '',
+                    Type: data.type,
+                    'Payment Method': data.paymentMethod,
+                    'Sub Total': parseInt(data.subTotal || '0'),
+                    'Discount Amount': parseInt(data.discountAmount || '0'),
+                    'Grand Total': parseInt(data.grandTotal || '0'),
+                    Items: data.items
+                        .map((item: any) => {
+                            return `${item.name} (${item.quantity} x ${item.sellingPrice})`;
+                        })
+                        .join(', '),
+                    'Created At': moment(data.createdAt).format(
+                        'YYYY-MM-DD hh:mm:ss A',
+                    ),
+                };
+            }),
+        );
+        const workbook = utils.book_new();
+        utils.book_append_sheet(workbook, worksheet, 'Receipts');
+        writeFile(workbook, fileName);
     }
 }

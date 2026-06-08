@@ -60,6 +60,13 @@ export const appRoutes: Route[] = [
                         (m) => m.DeletedReceiptModule,
                     ),
             },
+            {
+                path: 'expense',
+                loadChildren: () =>
+                    import('app/modules/pages/expense/expense.module').then(
+                        (m) => m.ExpenseModule,
+                    ),
+            },
         ],
     },
 

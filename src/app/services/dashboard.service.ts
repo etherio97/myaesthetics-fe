@@ -14,4 +14,18 @@ export class DashboardService {
             { params },
         );
     }
+
+    getMonthlyStatistics(params: any) {
+        return this.http.get(
+            [SERVICE_URLS.DASHBOARD_API, 'monthly-statistics'].join('/'),
+            { params },
+        );
+    }
+
+    getDailyStatistics(params: any) {
+        return this.http.get(
+            [SERVICE_URLS.DASHBOARD_API, 'daily-statistics'].join('/'),
+            { params },
+        );
+    }
 }
