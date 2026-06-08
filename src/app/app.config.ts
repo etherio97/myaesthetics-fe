@@ -22,7 +22,9 @@ export const APP_CONFIG = {
     MEMBER_TYPES: ['Regular', 'VIP', 'VVIP'],
     EXPENSE_CATEGORY: [
         'Miscellaneous',
-        'Stationery',
+        'Employee Benefits',
+        'Backbar Supplies',
+        'Small Equipment',
         'Transportation',
         'Utilities',
         'Maintenance',
