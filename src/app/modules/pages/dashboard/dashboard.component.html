@@ -18,10 +18,10 @@
 
     <div class="flex-auto p-6 sm:p-10">
         <app-admin-dashboard
-            *ngIf="['admin'].includes(role)"
+            *ngIf="['admin', 'manager'].includes(role)"
         ></app-admin-dashboard>
         <app-manager-dashboard
-            *ngIf="!['admin'].includes(role)"
+            *ngIf="!['admin', 'manager'].includes(role)"
         ></app-manager-dashboard>
     </div>
 </div>
