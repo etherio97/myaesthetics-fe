@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MY_DATE_FORMATS } from 'app/app.config';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { ReceiptService } from 'app/services/receipt.service';
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
     selector: 'app-view-receipt',
@@ -14,12 +15,19 @@ export class ViewReceiptComponent implements OnInit {
 
     data!: any;
 
+    role!: any;
+
     constructor(
         private _receiptService: ReceiptService,
         private route: ActivatedRoute,
+        private userService: UserService,
     ) {}
 
     ngOnInit(): void {
+        this.userService.get().subscribe((profile) => {
+            this.role = profile.role;
+        });
+
         this.route.params.subscribe(({ id }) => {
             this.id = id;
             this.loadData();

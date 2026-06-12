@@ -31,6 +31,19 @@
                         ></mat-icon>
                         Print
                     </button>
+                    <button
+                        *ngIf="['admin'].includes(role)"
+                        type="button"
+                        mat-flat-button
+                        class="items-center bg-amber-600 text-white"
+                        [routerLink]="['../../edit', data.id]"
+                    >
+                        <mat-icon
+                            svgIcon="mat_outline:edit"
+                            class="icon-size-5 mr-2"
+                        ></mat-icon>
+                        Edit
+                    </button>
                 </div>
             </div>
 

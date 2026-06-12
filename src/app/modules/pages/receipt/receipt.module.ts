@@ -24,7 +24,7 @@ import {
     NgxMatTimepickerModule,
     NgxNativeDateModule,
 } from '@angular-material-components/datetime-picker';
-import { MemberModule } from '../member/member.module';
+import { EditReceiptComponent } from './edit-receipt/edit-receipt.component';
 
 @NgModule({
     declarations: [
@@ -32,6 +32,7 @@ import { MemberModule } from '../member/member.module';
         CreateReceiptComponent,
         ReceiptItemComponent,
         ViewReceiptComponent,
+        EditReceiptComponent,
     ],
     imports: [
         RouterModule.forChild(receiptRoutes),

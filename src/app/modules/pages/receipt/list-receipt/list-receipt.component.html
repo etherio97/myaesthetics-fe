@@ -251,6 +251,17 @@
                                 ></mat-icon>
                             </button>
                             <button
+                                *ngIf="['admin'].includes(role)"
+                                mat-icon-button
+                                [routerLink]="['edit', element.id]"
+                                matTooltip="Edit"
+                            >
+                                <mat-icon
+                                    svgIcon="heroicons_outline:pencil-alt"
+                                    class="icon-size-4"
+                                ></mat-icon>
+                            </button>
+                            <button
                                 *ngIf="['admin', 'manager'].includes(role)"
                                 mat-icon-button
                                 (click)="removeReceipt(element.id)"

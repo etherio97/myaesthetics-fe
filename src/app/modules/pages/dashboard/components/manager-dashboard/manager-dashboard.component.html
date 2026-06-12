@@ -37,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col flex-auto h-80">
+                    <div class="flex flex-col flex-auto h-100">
                         <apx-chart
                             class="flex-auto w-full h-full"
                             [chart]="chartRevenueDaily.chart"
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col flex-auto h-80">
+                    <div class="flex flex-col flex-auto h-100">
                         <apx-chart
                             class="flex-auto w-full h-full"
                             [plotOptions]="chartVisitorsDaily.plotOptions"
@@ -128,6 +128,15 @@
                     unit="Kyats"
                     [current]="int(dailyData?.total_facial_revenue)"
                     [previous]="int(prevDailyData?.total_facial_revenue)"
+                    [isCurrency]="true"
+                ></app-display-item>
+
+                <!-- Total Expenses -->
+                <app-display-item
+                    title="Total Expenses"
+                    unit="Kyats"
+                    [current]="int(dailyData?.total_expenses)"
+                    [previous]="int(prevDailyData?.total_expenses)"
                     [isCurrency]="true"
                 ></app-display-item>
 

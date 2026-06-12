@@ -15,11 +15,11 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ListMemberComponent } from '../../member/list-member/list-member.component';
 
 @Component({
-    selector: 'app-create-receipt',
-    templateUrl: './create-receipt.component.html',
+    selector: 'app-edit-receipt',
+    templateUrl: './edit-receipt.component.html',
     providers: [{ provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
 })
-export class CreateReceiptComponent implements OnInit {
+export class EditReceiptComponent implements OnInit {
     formGroup!: FormGroup;
 
     items: any[] = [];
@@ -35,6 +35,8 @@ export class CreateReceiptComponent implements OnInit {
     _modal!: MatDialogRef<ListMemberComponent, any>;
 
     member: any;
+
+    receiptId!: string;
 
     constructor(
         private _receiptService: ReceiptService,
@@ -59,6 +61,26 @@ export class CreateReceiptComponent implements OnInit {
             type: ['Saloon'],
         });
 
+        this.route.params.subscribe((params) => {
+            this.receiptId = params['id'];
+            this._receiptService
+                .findById(this.receiptId)
+                .subscribe((res: any) => {
+                    let discount = 0;
+                    for (let item of res.items) {
+                        if (item.discount) {
+                            discount += item.discount;
+                        }
+                    }
+                    res.discountAmount -= discount;
+                    this.formGroup.patchValue(res);
+                    if (res.member) {
+                        this.member = res.member;
+                    }
+                    this.selectedItems = res.items || [];
+                });
+        });
+
         this.formGroup.controls.discountPercent.valueChanges.subscribe(
             (value) => {
                 let subTotal = this.getSubTotal();
@@ -76,10 +98,6 @@ export class CreateReceiptComponent implements OnInit {
                 startWith(''),
                 map((value) => this._filterItem(value || '')),
             );
-    }
-
-    log(i) {
-        console.log(i);
     }
 
     openMemberDialog() {
@@ -213,9 +231,9 @@ export class CreateReceiptComponent implements OnInit {
         delete data.item;
         delete data.discountPercent;
 
-        this._receiptService.create(data).subscribe((response: any) => {
+        this._receiptService.update(this.receiptId, data).subscribe(() => {
             setTimeout(() => {
-                this._router.navigate(['/receipts', 'view', response.id]);
+                this._router.navigate(['/receipts', 'view', this.receiptId]);
             });
         });
     }
